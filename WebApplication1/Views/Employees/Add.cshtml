@@ -1,0 +1,29 @@
+﻿@model WebApplication1.Models.AddEmployeeViewModel
+@{
+}
+
+<h1>Add employee</h1>
+<form method="post" action="Add" class="mt-5">
+  <div class="mb-3">
+    <label for="" class="form-label">Name</label>
+    <input required type="text" class="form-control" asp-for="Name">
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Email address</label>
+    <input required type="email" class="form-control" asp-for="Email">
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Password</label>
+    <input required type="password" class="form-control" asp-for="Password">
+  <div class="mb-3">
+    <label for="" class="label-success">@ViewBag.DuplicateMessage</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  @*<div class="mb-3">
+    <label for="" class="form-label">Confirm password</label>
+    <input required type="password" class="form-control" asp-for="ConfirmPassword">
+    <span asp-validation-for="Password"></span>
+  </div>*@
+
+</form>
