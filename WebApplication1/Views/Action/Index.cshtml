@@ -1,0 +1,94 @@
+﻿@model List<Employee>
+
+@{
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<h1>List of users</h1>
+
+<nav class="navbar navbar-light bg-light">
+	<button onclick="BlockUsers(true)" class="btn btn-danger" type="button">Block</button>
+	<button onclick="BlockUsers(false)" class="btn btn-outline-success" type="button"><i class="bi bi-unlock"></i></button>
+	<button onclick="DeleteUsers()" class="btn btn-outline-success" type="button"><i class="bi bi-trash"></i></button>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"><input type="checkbox" onClick="check_uncheck_checkbox(this.checked);" />Select all/Remove selection</th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Last login time</th>
+            <th scope="col">Registration time</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td><input type="checkbox" class="sel" name="employeeId" value="@employee.Id" /></td>
+                <td>@employee.Id</td>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>@employee.LastLoginTime</td>
+                <td>@employee.RegisterTime</td>
+                <td>@employee.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function check_uncheck_checkbox(isChecked) {
+        if (isChecked) {
+            $('.sel').each(function () {
+                this.checked = true;
+
+            });
+        } else {
+            $('.sel').each(function () {
+                this.checked = false;
+            });
+        }
+    }
+</script>
+
+<script>
+    function DeleteUsers() {
+        var idsToAdd = []
+        for (i = 0; i < $('.sel').length; i++)
+            if ($('.sel')[i].checked == true)
+                idsToAdd.push($('.sel')[i].value)
+
+        $.post({
+            url: "/DeleteUsers",
+            data: JSON.stringify(idsToAdd),
+            contentType: 'application/json; charset=utf-8',
+            success: () => {
+                location.reload();
+            }
+        });
+    }
+</script>
+
+<script>
+    function BlockUsers(isBlocked) {
+        var idsToAdd = []
+        for (i = 0; i < $('.sel').length; i++)
+            if ($('.sel')[i].checked == true)
+                idsToAdd.push($('.sel')[i].value)
+
+        $.post({
+            url: "/BlockUsers/" + isBlocked,
+            data: JSON.stringify(idsToAdd),
+            contentType: 'application/json; charset=utf-8',
+            success: () => {
+                location.reload();
+            }
+        });
+    }
+</script>
+
+
+

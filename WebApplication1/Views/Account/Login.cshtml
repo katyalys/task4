@@ -1,0 +1,17 @@
+﻿@model WebApplication1.Models.LoginModel
+@{
+}
+
+<h1>Login</h1>
+<form method="post" action="Login" class="mt-5">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div class="mb-3">
+        <label for="" class="form-label">Email address</label>
+        <input required type="email" class="form-control" asp-for="Email">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Password</label>
+        <input required type="password" class="form-control" asp-for="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
